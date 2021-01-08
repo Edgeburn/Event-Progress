@@ -7,4 +7,6 @@ from CalEvent import *
 # Month = 5:7
 # Day = 8:10
 
-test = CalEvent()
+test = CalEvent("test_event")
+
+print(test.getPercentage())
