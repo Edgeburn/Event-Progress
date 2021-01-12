@@ -78,11 +78,16 @@ class CalEvent:
         [####################]
         """
 
-        numOfFilledUnits = int((self.getPercentage() / 100) * 20)
-        numOfUnFilledUnits = 20 - numOfFilledUnits
-        filledUnitsString = "#" * numOfFilledUnits
-        unFilledUnitsString = " " * numOfUnFilledUnits
-        return f"[{filledUnitsString}{unFilledUnitsString}]"
+        if self.getPercentage() > 100:
+            return "[####################]"
+        elif self.getPercentage() < 100:
+            return "[                    ]"
+        else:
+            numOfFilledUnits = int((self.getPercentage() / 100) * 20)
+            numOfUnFilledUnits = 20 - numOfFilledUnits
+            filledUnitsString = "#" * numOfFilledUnits
+            unFilledUnitsString = " " * numOfUnFilledUnits
+            return f"[{filledUnitsString}{unFilledUnitsString}]"
         
 
 
