@@ -37,8 +37,7 @@ class CalEvent:
         try:
             fileToParse = open(f"{filename}.ebmevt")
         except FileNotFoundError:
-            print(f"Tried to open \"{filename}.ebmevt\", but it doesn't exist.")
-            del self
+            raise FileNotFoundError(f"Tried to open \"{filename}.ebmevt\", but it doesn't exist.")
         fileContents = fileToParse.readlines()  # Load each line of the file into a list
 
         for i in range(len(fileContents)):  # Remove all newline characters
