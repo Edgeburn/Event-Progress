@@ -1,6 +1,8 @@
+import globals
 import datetime as dt
 from CalEvent import *
 from miscfuncs import *
+globals.initialize()
 
 # Read date from YYYY/MM/DD format
 # Year = 0:4
@@ -8,8 +10,7 @@ from miscfuncs import *
 # Day = 8:10
 
 clearTerminal()
-
-events = reloadEvts()
+reloadEvts()
 
 
 appIsRunning = False

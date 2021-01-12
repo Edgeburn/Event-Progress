@@ -1,3 +1,4 @@
+import globals
 import datetime as dt
 import os
 from miscfuncs import *

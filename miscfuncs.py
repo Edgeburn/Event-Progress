@@ -1,4 +1,5 @@
 # Misc. Functions
+import globals
 import datetime as dt
 import os
 
@@ -27,9 +28,9 @@ def isEbmevtFile(filename) -> bool:
     else:
         return False
 
-def reloadEvts() -> list:
+def reloadEvts():
     from CalEvent import CalEvent
-    events = []
+    globals.events = []
         # Read all files in current directory for processing
     eventFileNames = []
 
@@ -41,7 +42,6 @@ def reloadEvts() -> list:
 
     for i in range(len(eventFileNames)):  # Generate CalEvent objects for each file
         currentFilename = eventFileNames[i]
-        events.append(CalEvent(currentFilename, i))
+        globals.events.append(CalEvent(currentFilename, i))
     
-    return events
     
