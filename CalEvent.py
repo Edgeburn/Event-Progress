@@ -16,7 +16,7 @@ class CalEvent:
 
     def __init__(self, filename, id) -> None:
         try:
-            fileToParse = open(f"{filename}.ebmevt")
+            fileToParse = open(f"{filename}")
         except FileNotFoundError:
             raise FileNotFoundError(f"Tried to open \"{filename}.ebmevt\", but it doesn't exist.")
         fileContents = fileToParse.readlines()  # Load each line of the file into a list

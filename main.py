@@ -20,6 +20,10 @@ with os.scandir() as filesInDirectory:  # Get all files in directory, and load t
 
 eventFileNames = list(filter(isEbmevtFile, eventFileNames))  # Ignore files which aren't EventProgress files
 
+for i in range(len(eventFileNames)):  # Generate CalEvent objects for each file
+    currentFilename = eventFileNames[i]
+    events.append(CalEvent(currentFilename, i))
+
 
 appIsRunning = False
 
