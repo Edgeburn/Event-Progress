@@ -13,6 +13,7 @@ class CalEvent:
     title = 0
     description = 0
     id = -1
+    filename = 0
 
 
     def __init__(self, filename, id) -> None:
@@ -27,6 +28,8 @@ class CalEvent:
 
 
         assert fileContents[0] == "FILEVERSION=V1"  # Ensure that the version of the file is correct
+
+        self.filename = filename
 
         unparsedTitle = fileContents[1]
         unparsedDescription = fileContents[2]
@@ -97,7 +100,13 @@ class CalEvent:
         Save the file with updated information to the disk
         """
         # TODO: Implement save file method
-        raise NotImplementedError
+        fileToWrite = globals.events[self.id]
+        fileToWrite = fileToWrite.filename
+        fileToWrite = open(fileToWrite, "w")
+        fileToWrite.write(f"FILEVERSION=V1\nTITLE={self.title}\nDESCRIPTION={self.description}START={self.start.year}-{self.start.month}-{self.start.day}\nEND={self.end.year}-{self.end.month}-{self.end.day}")
+        fileToWrite.close
+        reloadEvts()
+
 
     def __repr__(self) -> str:
         
