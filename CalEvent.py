@@ -13,7 +13,13 @@ def clearTerminal():
     """
     Clears the terminal of previous outputs. 
     """
-    print("\033[H\033[J")
+    from sys import platform
+    from os import system
+    if platform != "win32":
+        print("\033[H\033[J")
+    else:
+        system("cls")
+
 
 class CalEvent:
     """
