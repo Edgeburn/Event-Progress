@@ -1,25 +1,6 @@
 import datetime as dt
-
-def processDate(dateToProcess) -> dt.date:
-    """
-    Process a date in string format YYYY-MM-DD into a Date object
-    """
-    year = int(dateToProcess[0:4])
-    month = int(dateToProcess[5:7])
-    day = int(dateToProcess[8:10])
-    return dt.date(year, month, day)
-
-def clearTerminal():
-    """
-    Clears the terminal of previous outputs. 
-    """
-    from sys import platform
-    from os import system
-    if platform != "win32":
-        print("\033[H\033[J")
-    else:
-        system("cls")
-
+import os
+from miscfuncs import *
 
 class CalEvent:
     """
