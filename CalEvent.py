@@ -9,6 +9,12 @@ def processDate(dateToProcess) -> dt.date:
     day = int(dateToProcess[8:10])
     return dt.date(year, month, day)
 
+def clearTerminal():
+    """
+    Clears the terminal of previous outputs. 
+    """
+    print("\033[H\033[J")
+
 class CalEvent:
     """
     Class representing a calendar event
@@ -18,8 +24,10 @@ class CalEvent:
     end = 0
     title = 0
     description = 0
+    id = -1
 
-    def __init__(self, filename) -> None:
+
+    def __init__(self, filename, id) -> None:
         try:
             fileToParse = open(f"{filename}.ebmevt")
         except FileNotFoundError:
@@ -48,7 +56,7 @@ class CalEvent:
         self.start = processDate(self.start)
         self.end = processDate(self.end)
         
-
+        self.id = id
 
 
     def getPercentage(self, current = dt.date.today()) -> int:
@@ -77,12 +85,40 @@ class CalEvent:
         return round((currentUnixTimestamp - startUnixTimestamp) / (endUnixTimestamp - startUnixTimestamp) * 100)
 
 
+    def generateProgressBar(self):
+        """
+        Generate a progress bar for event overviews with this format:
+
+        [####################]
+        """
+
+        numOfFilledUnits = int((self.getPercentage() / 100) * 20)
+        numOfUnFilledUnits = 20 - numOfFilledUnits
+        filledUnitsString = "#" * numOfFilledUnits
+        unFilledUnitsString = " " * numOfUnFilledUnits
+        return f"[{filledUnitsString}{unFilledUnitsString}]"
+        
+
+
     def saveFile(self):
         """
         Save the file with updated information to the disk
         """
         # TODO: Implement save file method
         raise NotImplementedError
+
+    def __repr__(self) -> str:
+        
+        # Using __repr__ in order to simplify the small overview on program startup.
+
+        progressBar = self.generateProgressBar()
+        return f"""
+---------------------------
+{self.title} (#{self.id})
+{self.description}
+{progressBar} {self.getPercentage()}%
+---------------------------
+        """
 
 
 
