@@ -134,6 +134,18 @@ class CalEvent:
         print("----------------------------------------------")
         print("\n\n")
 
+
+    def editEvent(self):
+        """
+        Activate a prompt wherein the details of the event can be changed, and then saves it to the disk.
+        """
+        clearTerminal()
+        print("Editing this event.")
+        print(self)
+        print("To leave a value unchanged, leave your response blank.")
+
+        self.saveFile()
+
     def __repr__(self) -> str:
         
         # Using __repr__ in order to simplify the small overview on program startup.

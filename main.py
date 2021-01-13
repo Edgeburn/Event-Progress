@@ -52,6 +52,9 @@ while appIsRunning:
         else:
             clearTerminal()
         reloadEvts()
+    elif "edit" in action:
+        idOfEventToEdit = int(action[5:])
+        globals.events[idOfEventToEdit].editEvent()
     else:
         try:  # This try-except block's purpose is to open the overview of a particular event only if the input is a number and a valid event ID, without causing a crash in the event that it isn't
             action = int(action)
