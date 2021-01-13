@@ -26,8 +26,8 @@ class CalEvent:
         for i in range(len(fileContents)):  # Remove all newline characters
             fileContents[i] = fileContents[i].replace("\n", "")
 
-
-        assert fileContents[0] == "FILEVERSION=V1"  # Ensure that the version of the file is correct
+        assert len(fileContents) != 0, f"File {filename} is empty"
+        assert fileContents[0] == "FILEVERSION=V1", f"File {filename} is of incorrect version"  # Ensure that the version of the file is correct
 
         fileToParse.close()
         self.filename = filename
