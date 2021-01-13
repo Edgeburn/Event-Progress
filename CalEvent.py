@@ -125,7 +125,7 @@ class CalEvent:
         """
         clearTerminal()
         print("----------------------------------------------")
-        print(f"Event #{self.id}")
+        print(f"Event #{self.id} ({self.filename})")
         print("")
         print(self.title)
         print(self.description)
