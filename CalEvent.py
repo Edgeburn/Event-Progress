@@ -119,6 +119,9 @@ class CalEvent:
 
 
     def fullOverview(self):
+        """
+        Give a full overview of the given event
+        """
         clearTerminal()
         print("----------------------------------------------")
         print(f"Event #{self.id}")
