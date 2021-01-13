@@ -118,6 +118,19 @@ class CalEvent:
         reloadEvts()
 
 
+    def fullOverview(self):
+        clearTerminal()
+        print("----------------------------------------------")
+        print(f"Event #{self.id}")
+        print("")
+        print(self.title)
+        print(self.description)
+        print("")
+        print(f"{self.start} through {self.end}")
+        print(f"{self.generateProgressBar()} {self.getPercentage()}% Complete")
+        print("----------------------------------------------")
+        print("\n\n")
+
     def __repr__(self) -> str:
         
         # Using __repr__ in order to simplify the small overview on program startup.
