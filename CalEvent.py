@@ -64,7 +64,7 @@ class CalEvent:
             raise TypeError("Current time is not of object type date")
 
         if self.start == self.end:
-            raise RuntimeError("start and end of event are equal!")
+            return 100
 
         unixTime1970 = dt.date(1970, 1, 1)  # The start of UNIX time as a variable for simplicity.
 
