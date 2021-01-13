@@ -84,7 +84,7 @@ class CalEvent:
 
         if self.getPercentage() > 100:
             return "[####################]"
-        elif self.getPercentage() < 100:
+        elif self.getPercentage() < 0:
             return "[                    ]"
         else:
             numOfFilledUnits = int((self.getPercentage() / 100) * 20)
