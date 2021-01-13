@@ -44,4 +44,9 @@ def reloadEvts():
         currentFilename = eventFileNames[i]
         globals.events.append(CalEvent(currentFilename, i))
     
-    
+
+def fileSaveNumberParser(num) -> str:
+    if num < 10:
+        return f"0{num}"
+    else:
+        return str(num)

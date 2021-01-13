@@ -29,6 +29,7 @@ class CalEvent:
 
         assert fileContents[0] == "FILEVERSION=V1"  # Ensure that the version of the file is correct
 
+        fileToParse.close()
         self.filename = filename
 
         unparsedTitle = fileContents[1]
@@ -99,12 +100,21 @@ class CalEvent:
         """
         Save the file with updated information to the disk
         """
-        # TODO: Implement save file method
         fileToWrite = globals.events[self.id]
         fileToWrite = fileToWrite.filename
         fileToWrite = open(fileToWrite, "w")
-        fileToWrite.write(f"FILEVERSION=V1\nTITLE={self.title}\nDESCRIPTION={self.description}START={self.start.year}-{self.start.month}-{self.start.day}\nEND={self.end.year}-{self.end.month}-{self.end.day}")
-        fileToWrite.close
+
+        toWrite = []
+
+        toWrite.append("FILEVERSION=V1\n")
+        toWrite.append(f"TITLE={self.title}\n")
+        toWrite.append(f"DESCRIPTION={self.description}\n")
+        toWrite.append(f"START={self.start.year}-{fileSaveNumberParser(self.start.month)}-{fileSaveNumberParser(self.start.day)}\n")
+        toWrite.append(f"END={self.end.year}-{fileSaveNumberParser(self.end.month)}-{fileSaveNumberParser(self.end.day)}\n")
+
+        fileToWrite.writelines(toWrite)
+        
+        fileToWrite.close()
         reloadEvts()
 
 
