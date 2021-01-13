@@ -1,3 +1,4 @@
+from typing import get_origin
 import globals
 import datetime as dt
 import os
@@ -143,6 +144,24 @@ class CalEvent:
         print("Editing this event.")
         print(self)
         print("To leave a value unchanged, leave your response blank.")
+        print("")
+
+        # Collect new values from user
+        newTitle = input(f"Title > ")
+        newDescription = input(f"Description > ")
+        newStart = input("Start date (YYYY-MM-DD) > ")
+        newEnd = input("End date (YYYY-MM-DD) > ")
+
+        # Check if values are empty; if they are, do not change values
+        if newTitle != "":
+            self.title = newTitle
+        if newDescription != "":
+            self.description = newDescription
+        if newStart != "":
+            self.start = processDate(newStart)
+        if newEnd != "":
+            self.end = processDate(newEnd)
+        
 
         self.saveFile()
 

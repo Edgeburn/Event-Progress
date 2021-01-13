@@ -18,7 +18,7 @@ appIsRunning = True
 while appIsRunning:
     action = ""
     print(f"{len(globals.events)} events found. ")
-    print("List all events with \"list\". To view more information about a particular event, enter the event’s ID. To edit, enter \"edit <event ID>\". To delete, enter \"delete <event ID>\". To quit, enter \"quit\".")
+    print("List all events with \"list\". To view more information about a particular event, enter the event’s ID. To edit, enter \"edit <event ID>\". To delete, enter \"delete <event ID>\". Enter \"new\" to create a new event. To quit, enter \"quit\".")
     action = input("> ")
     action = action.lower()
 
@@ -55,6 +55,39 @@ while appIsRunning:
     elif "edit" in action:
         idOfEventToEdit = int(action[5:])
         globals.events[idOfEventToEdit].editEvent()
+    elif action == "new":
+        clearTerminal()
+        print("--------------------")
+        print("Create New Event")
+        print("--------------------")
+        print("\n")
+        newEventFilename = input("File name for new event > ")
+        if newEventFilename == "":
+            newEventFilename = str(len(globals.events) + 1)
+        newEventFilename = f"{newEventFilename}.ebmevt"
+        newEventFile = open(newEventFilename, "w")
+
+        # Write data to file
+        dataToWrite = []
+        dataToWrite.append("FILEVERSION=V1\n")
+        dataToWrite.append("TITLE=Untitled Event\n")
+        dataToWrite.append("DESCRIPTION=\n")
+        dataToWrite.append(f"START={dt.date.today()}\n")
+        dataToWrite.append(f"END={dt.date.today()}\n")
+        newEventFile.writelines(dataToWrite)
+        newEventFile.close()
+        reloadEvts()
+
+        # Find the event ID of the event that was just created
+        idOfNewEvent = -1
+        for i in range(len(globals.events)):
+            if globals.events[i].filename == newEventFilename:
+                idOfNewEvent = i
+                break
+
+        globals.events[idOfNewEvent].editEvent()
+
+
     else:
         try:  # This try-except block's purpose is to open the overview of a particular event only if the input is a number and a valid event ID, without causing a crash in the event that it isn't
             action = int(action)
