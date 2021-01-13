@@ -43,11 +43,15 @@ while appIsRunning:
         deleteConfirmation = deleteConfirmation.lower()
         if deleteConfirmation == "y":
             if os.path.exists(filenameOfFileToDelete):
-                os.remove(filenameOfFileToDelete)
+                try:
+                    os.remove(filenameOfFileToDelete)
+                except:
+                    print("We couldn't delete the file due to an error")
             else:
                 print(f"We couldn't delete \"{filenameOfFileToDelete}\" because it doesn't seem to exist.")
         else:
             clearTerminal()
+        reloadEvts()
     else:
         try:  # This try-except block's purpose is to open the overview of a particular event only if the input is a number and a valid event ID, without causing a crash in the event that it isn't
             action = int(action)
