@@ -50,3 +50,13 @@ def fileSaveNumberParser(num) -> str:
         return f"0{num}"
     else:
         return str(num)
+
+def generateFilename() -> str:
+    filenameFound = False
+    potentialFilenameNumber = len(globals.events) + 1  # Get the first possible potential filename
+    while not filenameFound:
+        potentialFilename = f"{potentialFilenameNumber}.ebmevt"
+        for event in globals.events:
+            if event.filename == potentialFilename:
+                potentialFilenameNumber += 1
+    
