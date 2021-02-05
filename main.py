@@ -64,6 +64,8 @@ while appIsRunning:
         newEventFilename = input("File name for new event > ")
         if newEventFilename == "":
             newEventFilename = generateFilename()
+        if doesFilenameExist(newEventFilename):
+            newEventFilename = f"{newEventFilename} (1)"
         newEventFilename = f"{newEventFilename}.ebmevt"
         newEventFile = open(newEventFilename, "w")
 
