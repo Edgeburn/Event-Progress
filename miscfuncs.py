@@ -51,12 +51,20 @@ def fileSaveNumberParser(num) -> str:
     else:
         return str(num)
 
+
+def doesFilenameExist(filenameToCheck) -> bool:
+    for i in globals.events:
+        if i.filename == filenameToCheck or i.filename == f"{filenameToCheck}.ebmevt":
+            return True
+    return False
+
 def generateFilename() -> str:
     filenameFound = False
-    potentialFilenameNumber = len(globals.events) + 1  # Get the first possible potential filename
+    potentialFilenameNumber = 1  # Get the first possible potential filename
     while not filenameFound:
-        potentialFilename = f"{potentialFilenameNumber}.ebmevt"
-        for event in globals.events:
-            if event.filename == potentialFilename:
-                potentialFilenameNumber += 1
+        if doesFilenameExist(potentialFilenameNumber):
+            potentialFilenameNumber += 1
+        else:
+            return potentialFilenameNumber
+
     
