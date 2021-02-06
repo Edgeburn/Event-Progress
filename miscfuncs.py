@@ -67,4 +67,24 @@ def generateFilename() -> str:
         else:
             return potentialFilenameNumber
 
-    
+def eventSearch(searchTerm):
+    """
+    Finds events with the given search term in their title, description, or filename. Then prints out these events
+    """
+    searchTerm = searchTerm.lower()
+    matchingEvents = []
+    # Search for the search term in each thing
+    for event in globals.events:
+        if searchTerm in event.title.lower():
+            matchingEvents.append(event)
+        
+        if searchTerm in event.description.lower():
+            matchingEvents.append(event)
+
+        if searchTerm in event.filename.lower():
+            matchingEvents.append(event)
+
+    clearTerminal()
+    print(f"{len(matchingEvents)} results found for \"{searchTerm}\"")
+    for event in matchingEvents:
+        print(event)
