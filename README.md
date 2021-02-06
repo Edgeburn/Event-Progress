@@ -60,8 +60,9 @@ These may or may not be added at some point. I may also just decide to abandon t
 - [ ] GUI
 - [ ] Add support for times in addition to dates
 - [ ] Allow for files formatted incorrectly to be skipped and ignored
-- [ ] When a new event is created with a blank event filename, check that the generated filename does not already exist
+- [x] When a new event is created with a blank event filename, check that the generated filename does not already exist
 - [ ] Accept dates written in an incorrect format
+- [ ] Search function
 
 ## Possible problems and their solutions
 
