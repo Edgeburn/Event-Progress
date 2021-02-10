@@ -1,4 +1,4 @@
 def initialize():
-    global events
-    events = []
+	global events
+	events = []
 
