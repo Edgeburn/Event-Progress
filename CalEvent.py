@@ -19,37 +19,44 @@ class CalEvent:
 
 	def __init__(self, filename, id) -> None:
 		try:
-			fileToParse = open(f"{filename}")
-		except FileNotFoundError:
-			raise FileNotFoundError(f"Tried to open \"{filename}.ebmevt\", but it doesn't exist.")
-		fileContents = fileToParse.readlines()  # Load each line of the file into a list
+			try:
+				fileToParse = open(f"{filename}")
+			except FileNotFoundError:
+				raise FileNotFoundError(f"Tried to open \"{filename}.ebmevt\", but it doesn't exist.")
+			fileContents = fileToParse.readlines()  # Load each line of the file into a list
 
-		for i in range(len(fileContents)):  # Remove all newline characters
-			fileContents[i] = fileContents[i].replace("\n", "")
+			for i in range(len(fileContents)):  # Remove all newline characters
+				fileContents[i] = fileContents[i].replace("\n", "")
 
-		assert len(fileContents) != 0, f"File {filename} is empty"
-		assert fileContents[0] == "FILEVERSION=V1", f"File {filename} is of incorrect version"  # Ensure that the version of the file is correct
+			assert len(fileContents) != 0, f"File {filename} is empty"
+			assert fileContents[0] == "FILEVERSION=V1", f"File {filename} is of incorrect version"  # Ensure that the version of the file is correct
 
-		fileToParse.close()
-		self.filename = filename
+			fileToParse.close()
+			self.filename = filename
 
-		unparsedTitle = fileContents[1]
-		unparsedDescription = fileContents[2]
-		unparsedStart = fileContents[3]
-		unparsedEnd = fileContents[4]
+			unparsedTitle = fileContents[1]
+			unparsedDescription = fileContents[2]
+			unparsedStart = fileContents[3]
+			unparsedEnd = fileContents[4]
 
-		# Parse file
-		self.title = unparsedTitle[6:]
-		self.description = unparsedDescription[12:]
-		self.start = unparsedStart[6:]
-		self.end = unparsedEnd[4:]
-		# Start and end still need further processing!
+			# Parse file
+			self.title = unparsedTitle[6:]
+			self.description = unparsedDescription[12:]
+			self.start = unparsedStart[6:]
+			self.end = unparsedEnd[4:]
+			# Start and end still need further processing!
 
-		self.start = processDate(self.start)
-		self.end = processDate(self.end)
-		
-		self.id = id
-
+			self.start = processDate(self.start)
+			self.end = processDate(self.end)
+			
+			self.id = id
+		except:
+			self.filename = filename
+			self.id = id
+			self.title = "Unreadable event file"
+			self.description = "An error occurred when trying to read this event file."
+			self.start = dt.date.today()
+			self.end = dt.date.today()
 
 	def getPercentage(self, current = dt.date.today()) -> int:
 		"""
