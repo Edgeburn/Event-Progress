@@ -12,11 +12,11 @@ def processDate(dateToProcess) -> dt.date:
 	day = int(dateToProcess[8:10])
 	return dt.date(year, month, day)
 
-def requestDate(dateName, separators=False, nameLocation="before") -> dt.date:
+def requestDate(dateName, currentValue, separators=False, nameLocation="before") -> dt.date:
 	"""
 	Request a date from user
 	"""
-	if nameLocation = "after":
+	if nameLocation == "after":
 		datePrompt = f"date {dateName}"
 	else:
 		datePrompt = f"{dateName} date"
