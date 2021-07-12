@@ -12,6 +12,21 @@ def processDate(dateToProcess) -> dt.date:
 	day = int(dateToProcess[8:10])
 	return dt.date(year, month, day)
 
+def requestDate(dateName, separators=False, nameLocation="before") -> dt.date:
+	"""
+	Request a date from user
+	"""
+	if nameLocation = "after":
+		datePrompt = f"date {dateName}"
+	else:
+		datePrompt = f"{dateName} date"
+	if separators:
+		print("---------------------------")
+	year = int(input(f"Year for {datePrompt} > "))
+	month = int(input(f"Month for {datePrompt} > "))
+	day = int(input(f"Day for {datePrompt} > "))
+	return dt.date(year, month, day)
+
 def clearTerminal():
 	"""
 	Clears the terminal of previous outputs. 
